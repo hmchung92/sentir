@@ -1,0 +1,22 @@
+.logo-brand{
+    background: #34BC9B !important;
+}
+.top-nav-content{
+    background: #ffffff !important;
+}
+.top-navbar{
+
+}
+.sidebar-left{
+    background: #34BC9B !important;
+}
+ul.sidebar-menu li ul.submenu {
+    color: #656D78;
+    background-color: #F6F7F9;
+    border-bottom-color: #F6F7F9;
+}
+
+.sidebar-left-content{
+    color: #C6FFF1 !important;
+    border-bottom-color: #28AA8B !important;
+}
