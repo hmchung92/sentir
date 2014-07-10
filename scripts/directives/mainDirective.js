@@ -44,7 +44,7 @@
                     data:'=stData'
                 },
                 templateUrl:'views/color-schemes.html',
-                link:function (scope, element) {
+                link:function (scope, element, attr) {
                     var show = true,
                         boxColor = element.find('.box-demo');
                     var toggle = {
@@ -68,7 +68,7 @@
             return{
                 restrict:'E',
                 templateUrl:'views/color-schemes-content.html',
-                link:function (scope, element) {
+                link:function (scope, element, attr) {
                     var changecolor = element.find('#color');
                     var style = angular.element('.style-color-schemes');
                     changecolor.on('mousedown', function () {
@@ -79,6 +79,46 @@
                             style.append('<link rel="stylesheet" href="styles/color-schemes/color-schemes-' + scope.item.link + '.css"/>');
                         }
                     });
+
+//              var demo = element.find('#color');
+//            var sidebar = angular.element('.sidebar-menu');
+//            var subsidebar = angular.element('.sidebar-menu li a');
+//            var logo = angular.element('.logo-brand');
+//            var navContent = angular.element('.top-nav-content');
+//            var fa = angular.element('.top-navbar');
+//            var nav = angular.element('.dropdown-toggle');
+//            var bullhorn = angular.element('.btn-collapse-sidebar-right');
+//
+//            var sidebartext = angular.element('.sidebar-left-content');
+//          demo.on('mousedown', function(){
+//
+//              var head = angular.element('head');
+//              $('head').append('<link rel="stylesheet" href="styles/color-schemes-default.css"/>');
+//
+//            logo.css('background', scope.data.logo);
+//            sidebar.css('background', scope.data.sidebar);
+//            subsidebar.css('border-bottom-color', scope.data.subsidebar);
+//            navContent.css('background', scope.data.navcontent);
+//
+//            sidebartext.css('color','#AAB2BD');
+//
+//            if(scope.data.topcolor == 'bg-white' && scope.data.top == 'half-tiles'){
+//              sidebartext.css('color',scope.data.colorsidebar);
+//            }
+//
+//            if(scope.data.navcontent != '#ffffff' && scope.data.top == 'half-tiles'){
+//              fa.css('color', 'white');
+//              nav.css('color', 'white');
+//              bullhorn.css('color', 'white');
+//            }
+//            else{
+//              fa.css('color', '#656D78');
+//              nav.css('color', '#656D78');
+//              bullhorn.css('color', '#656D78');
+//            }
+//
+//          });
+
                 }
             };
         })
@@ -123,7 +163,7 @@
                 templateUrl:'views/main-site-infomation.html'
             };
         })
-        .directive('subInfomation', function () {
+        .directive('subInfomation', function ($window) {
             return{
                 restrict:'A',
                 require:'^mainSiteInfomation',
@@ -139,7 +179,7 @@
                         today = scope.item.number,
                         bgProgress = element.find('.progress-bar'),
                         yesterday = siteInfomationLast[attrs.stIndex].number,
-                        percent = window.Math.round(((today - yesterday) / yesterday) * 100);
+                        percent = $window.Math.round(((today - yesterday) / yesterday) * 100);
 
                     scope.number = today;
 
@@ -177,7 +217,7 @@
                 },
                 controller:'NiceScroll',
                 templateUrl:'views/sidebar-left.html',
-                link: function (scope/*, element, attr*/) {
+                link: function (scope, element, attr) {
                     /** SIDEBAR FUNCTION **/
                     scope.chung = function (index) {
                         scope.sub = scope.sub == index ? -2 : index;
@@ -278,13 +318,7 @@
                     today:'=stToday',
                     tomorow:'=stTomorow'
                 },
-                controller: function($scope){
-                  $scope.weather = {
-                    sleet: 'sleet'
-                  };
-                },
                 templateUrl:'views/weather-widget.html'
-
             };
         })
 
@@ -304,24 +338,24 @@
                 scope:{
                     data:'=stData'
                 },
-//                controller:function () {
-//                    if (typeof Skycons !== 'undefined') {
-//                        var icons = new Skycons(
-//                                {"color":"#fff"},
-//                                {"resizeClear":true}
-//                            ),
-//                            list = [
-//                                "clear-day", "rain",
-//                                "partly-cloudy-night", "clear-night", "sleet", "snow", "wind",
-//                                "fog"
-//                            ],
-//                            i;
-//
-//                        for (i = list.length; i--;)
-//                            icons.set(list[i], list[i]);
-//                        icons.play();
-//                    }
-//                },
+                controller:function () {
+                    if (typeof Skycons !== 'undefined') {
+                        var icons = new Skycons(
+                                {"color":"#fff"},
+                                {"resizeClear":true}
+                            ),
+                            list = [
+                                "clear-day", "rain",
+                                "partly-cloudy-night", "clear-night", "sleet", "snow", "wind",
+                                "fog"
+                            ],
+                            i;
+
+                        for (i = list.length; i--;)
+                            icons.set(list[i], list[i]);
+                        icons.play();
+                    }
+                },
                 templateUrl:'views/friend-requests-item.html',
                 link:function (scope, element, attrs) {
                     //Css for first row
@@ -425,12 +459,9 @@
         .directive('mainWeatherWidgetContent', function () {
             return{
                 restrict:'E',
-                controller: function($scope){
-
-
-                },
+                controller:'',
                 templateUrl:'views/main-weather-widget-content.html',
-                link:function (scope, element) {
+                link:function (scope, element, attrs) {
                     var status = scope.item.status,
                         bgElement = element.find('#box-weather4');
 
@@ -465,7 +496,7 @@
                 data:'=stData'
             },
             templateUrl:'views/last-week-popular-item.html',
-            link:function (scope, element) {
+            link:function (scope, element, attr) {
                 $timeout(function () {
                     element.find('#owl-popular').owlCarousel({
                         navigation:false, // Show next and pre buttons

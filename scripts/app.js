@@ -9,8 +9,7 @@ angular
     'ui.bootstrap',
     'mainDirective',
     'mainFilter',
-    'mc.sentik',
-    'angular-skycons'
+    'mc.sentik'
   ])
   .config(function ($routeProvider) {
     $routeProvider
